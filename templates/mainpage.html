@@ -1,0 +1,14 @@
+<h1>Homepage html(bauka)</h1>
+
+{% for cospblog in object_list %}
+    <ul>
+       <li><a href="{% url 'postarticle' cospblog.pk %}"> <h1>{{ cospblog.post_title }}</h1></a>
+        Author: {{ cospblog.author.first_name }} {{ cospblog.author.last_name }}
+        <br>
+        <br>
+    {{ cospblog.your_post }}
+        </ul>
+{% endfor %}
+
+
+

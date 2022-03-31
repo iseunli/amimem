@@ -1,5 +1,8 @@
+#home
 from django.urls import path
-from . import views
+from .views import MainPage, PostArticle
+
 urlpatterns = [
-    path('', views.home, name="home"),
+    path('', MainPage.as_view(), name = "mainpage"),
+    path('post/<int:pk>', PostArticle.as_view(), name = "postarticle")
 ]
