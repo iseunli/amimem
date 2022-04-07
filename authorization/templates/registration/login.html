@@ -1,0 +1,12 @@
+<h1>SIGN in</h1>
+
+<br>
+
+<div class ="form-group">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class ="btn btn-secondary">Sign in</button>
+    </form>
+
+</div>
