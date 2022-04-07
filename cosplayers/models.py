@@ -6,3 +6,4 @@ class CospBlog (models.Model):
     post_title = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     your_post = models.TextField()
+

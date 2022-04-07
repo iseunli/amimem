@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+h1 {text-align: center}
+form {text-align: center}
+</style>
+
+
+<div class="card" >
+  <h1 class="card-title"  >{{ jum_word }}</h1>
+  <div class="card-body">
+  <form action="{% url 'check' %}" method="get">
+    <input type="text" name = "answer" placeholder="Answer">
+    <br>
+    <br>
+  <h3>Score:   {{ msg }}</h3>
+      <h3>{{ failure }}</h3>
+      <br>
+     <button type="submit" class="btn btn-dark">Check</button>
+</form>
+
+  </div>
+</div>
+
+{% endblock %}
+
