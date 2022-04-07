@@ -1,7 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <h1>{{ cospblog.post_title }}</h1>
         Author: {{ cospblog.author.first_name }} {{ cospblog.author.last_name }}
         <br>
         <br>
     {{ cospblog.your_post }}
-
-  <h3><li><a href="{% url 'mainpage' %}"> Go Back </a></h3>
+<br><br>
+<a href="{% url 'mainpage' %}" class="btn btn-dark"> Go Back </a>
+{% endblock %}
