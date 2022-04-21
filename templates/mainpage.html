@@ -2,8 +2,7 @@
 {% block content %}
 
 <h1>Homepage html(bauka)</h1>
-<h3><li><a href = "{% url 'registration' %}">Sign Up</a></h3>
-<h3><li><a href = "{% url 'login' %}">Sign In</a></h3>
+
 <ul>
     {% for cospblog in object_list %}
        <li><a href="{% url 'postarticle' cospblog.pk %}"> {{ cospblog.post_title }}</a>

@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import CospBlog
+from django.urls import reverse_lazy
 import random
 
 
@@ -62,13 +63,42 @@ def checkans(request):
                    'msg': msg,
                     'failure': failure})
 
+def quizz (request):
+    return render(request, 'quiz.html')
+
+
+
+
+def tests(request):
+    return render(request, 'tests.html')
+def test1(request):
+    return render(request, 'test1.html')
+def test2(request):
+    return render(request, 'test2.html')
+def test3(request):
+    return render(request, 'test3.html')
 
 class MainPage(ListView):
     model = CospBlog
     template_name = 'mainpage.html'
+    ordering = [ '-id']
 
 class PostArticle(DetailView):
     model = CospBlog
     template_name = 'post_article.html'
 
+class AddPostView(CreateView):
+    model = CospBlog
+    template_name = 'add_blog.html'
+    fields = '__all__'
 
+
+class UpdatePostView(UpdateView):
+    model = CospBlog
+    template_name = 'edit_blog.html'
+    fields = ['post_title', 'your_post']
+
+class DeletePostView(DeleteView):
+    model = CospBlog
+    template_name = 'delete_blog.html'
+    success_url = reverse_lazy('mainpage')
