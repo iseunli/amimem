@@ -6,12 +6,15 @@
 <ul>
     {% for cospblog in object_list %}
        <li><a href="{% url 'postarticle' cospblog.pk %}"> {{ cospblog.post_title }}</a>
-        Author: {{ cospblog.author.first_name }} {{ cospblog.author.last_name }}
+
         <br>
-    {{ cospblog.your_post }}
-        <br>
+         <small> *{{ cospblog.author.first_name }} {{ cospblog.author.last_name }}*
+      </small>
         <br>
 {% endfor %}
         </ul>
 {% endblock %}
+
+
+
 

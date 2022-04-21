@@ -40,29 +40,36 @@
     </div>
   </div>
       <div class="navbar-collapse collapse w-400 order-3 dual-collapse2">
+
+
+
         <ul class="navbar-nav ml-auto">
+        {% if user.is_authenticated%}
                  <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Account
+            {{ user.username }}
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'mainpage' %}">Profile</a></li>
             <li><a class="dropdown-item" href="{% url 'create_post' %}">Create New Blog</a></li>
           </ul>
         </li>
-            {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" > {{ user.username }}</a>
-            </li>
-            {% endif %}
+         {% endif %}
 
+
+{% if not user.is_authenticated%}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'registration' %}">Register</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}">Login</a>
             </li>
-
+        {% endif %}
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">LogOut</a>
+            </li>
+{% endif %}
 
         </ul>
     </div>

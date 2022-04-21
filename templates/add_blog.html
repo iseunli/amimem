@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+    {% if user.is_authenticated %}
+
 <h1>Create Blog</h1>
 <br><br>
 <form method = "POST">
@@ -9,5 +11,19 @@
     <button class="btn btn-dark">Post</button>
 </form>
 
+<script>
+    var name = "{{ user.id }}";
+    document.getElementById("nameadd").value
+    = name;
+
+</script>
+
+
+     {% else %}
+    <h3>Sig In to Start Work</h3>
+
+    {% endif %}
+
 
 {% endblock %}
+

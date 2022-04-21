@@ -2,10 +2,11 @@
 {% block content %}
 
 <h1>{{ cospblog.post_title }}</h1>
+
         Author: {{ cospblog.author.first_name }} {{ cospblog.author.last_name }}
         <br>
         <br>
-    {{ cospblog.your_post }}
+    {{ cospblog.your_post | linebreaks}}
 <br><br>
 {% if user.is_authenticated %}
     {% if user.id == cospblog.author.id %}
@@ -13,7 +14,10 @@
     <a href="{% url 'delete_post' cospblog.pk %}" class="btn btn-dark"> Delete </a>
 {% endif %}
     {% endif %}
-    <br><br>
+
+    <br>
+    <small>Date: {{ cospblog.post_date }}</small>
+    <br>
  <a href="{% url 'mainpage' %}" class="btn btn-dark"> Go Back </a>
 
 {% endblock %}

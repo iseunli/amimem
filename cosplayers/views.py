@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import CospBlog
 from django.urls import reverse_lazy
 import random
-
+from .forms import CospBlogForm
 
 
 
@@ -81,7 +81,7 @@ def test3(request):
 class MainPage(ListView):
     model = CospBlog
     template_name = 'mainpage.html'
-    ordering = [ '-id']
+    ordering = [ '-post_date']
 
 class PostArticle(DetailView):
     model = CospBlog
@@ -89,8 +89,9 @@ class PostArticle(DetailView):
 
 class AddPostView(CreateView):
     model = CospBlog
+    form_class = CospBlogForm
     template_name = 'add_blog.html'
-    fields = '__all__'
+
 
 
 class UpdatePostView(UpdateView):
