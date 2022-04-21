@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == cospblog.author.id %}
+<h1>Delete Blog</h1>
+<br><br>
+
+    <h2>Delete: {{ cospblog.post_title }}</h2>
+
+<form method = "POST">
+    {% csrf_token %}
+    <h4>Delete Post</h4>
+    <br>
+    <button class="btn btn-dark">Delete</button>
+</form>
+
+ {% else %}
+    <h3>Sig In to Start Work</h3>
+{% endif %}
+    {% endif %}
+
+{% endblock %}

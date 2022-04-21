@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    {% if user.id == cospblog.author.id %}
+
+        <h1>Edit Blog</h1>
+        <br><br>
+        <form method = "POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-dark">Save</button>
+        </form>
+    {% else %}
+    <h3>Sig In to Start Work</h3>
+{% endif %}
+    {% endif %}
+
+{% endblock %}
