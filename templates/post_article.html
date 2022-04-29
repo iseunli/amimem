@@ -3,7 +3,9 @@
 
 <h1>{{ cospblog.post_title }}</h1>
 
-        Author: {{ cospblog.author.first_name }} {{ cospblog.author.last_name }}
+    Author: {{ cospblog.author.first_name }} {{ cospblog.author.last_name }}
+    <br>
+        <small>Date: {{ cospblog.post_date }}</small>
         <br>
         <br>
     {{ cospblog.your_post | linebreaks}}
@@ -16,8 +18,58 @@
     {% endif %}
 
     <br>
-    <small>Date: {{ cospblog.post_date }}</small>
+
     <br>
+
+    <form action="{% url 'likes_post' cospblog.pk  %}"
+          method="POST">
+    {% csrf_token %}
+
+
+    {% if user.is_authenticated %}
+        {% if liked  %}
+    <button type = "submit" name = "post_id"
+            value= "{{  cospblog.id }}"
+            class="btn btn-dark">UnLike</button>
+    {% else %}
+ <button type = "submit" name = "post_id"
+            value= "{{  cospblog.id }}"
+            class="btn btn-dark">Like</button>
+    {% endif %}
+
+    {% else %}
+
+    {% endif %}
+    </form>
+
+
+    <form action="{% url 'favourite_post' cospblog.pk  %}"
+          method="POST">
+    {% csrf_token %}
+
+    {% if user.is_authenticated %}
+        {% if  is_fav  %}
+    <button type = "submit" name = "fav_id"
+            value= "{{ cospblog.id }}"
+            class="btn btn-dark">Delete From Favourites
+    </button>
+    {% else %}
+ <button type = "submit" name = "fav_id"
+            value= "{{ cospblog.id }}"
+            class="btn btn-dark">Add To Favourites</button>
+    {% endif %}
+
+    {% else %}
+
+    {% endif %}
+    </form>
+
+
+
+    <br><hr>
+    Likes:{{ total_likes }}<br>
+
+<br>
  <a href="{% url 'mainpage' %}" class="btn btn-dark"> Go Back </a>
 
 {% endblock %}

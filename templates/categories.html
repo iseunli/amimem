@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  {% if  category_posts %}
+
+<h1>{{ cats }}</h1>
+<ul>
+    {% for cospblog in category_posts %}
+
+        <li><a href="{% url 'postarticle' cospblog.pk %}"> {{ cospblog.post_title }}</a>
+        <br>
+         <small> *{{ cospblog.author.first_name }} {{ cospblog.author.last_name }}*
+      </small>
+        <br>
+
+    {% endfor %}
+</ul>
+
+    {% else %}
+    <h2>This page does not exist</h2>
+    {% endif %}
+
+{% endblock %}
+
+

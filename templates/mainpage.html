@@ -8,11 +8,15 @@
        <li><a href="{% url 'postarticle' cospblog.pk %}"> {{ cospblog.post_title }}</a>
 
         <br>
-         <small> *{{ cospblog.author.first_name }} {{ cospblog.author.last_name }}*
+         <small>
+             *{{ cospblog.author.first_name }} {{ cospblog.author.last_name }}* -
+             <a href="{% url 'category' cospblog.category  %}"> {{ cospblog.category }} </a>
       </small>
         <br>
 {% endfor %}
         </ul>
+
+
 {% endblock %}
 
 
