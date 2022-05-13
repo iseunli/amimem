@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+     <h2>Favourites</h2>
+{% for p in favourite_lists %}
+    Title:
+     <a href="{% url 'postarticle' p.pk %}"> {{ p.post_title  }}</a>
+    <br>
+ <small> *{{ p.author.first_name }} {{ p.author.last_name }}*
+      </small>
+<br>
+    <br>
+{% empty %}
+ No favourites yet!
+{% endfor %}
+{% endblock %}
+
