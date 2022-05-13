@@ -25,23 +25,11 @@
         </li>
 
           <!--- CATEGORIES --->
-       {% if cat_menu %}
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Categories
-          </a>
 
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            {% for item in cat_menu %}
-            <a class="dropdown-item" href="{% url 'category' item %}"> {{item }} </a>
-                {% endfor%}
-          </ul>
-        </li>
-           {% else %}
            <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'category_menu' %}">Categories</a>
         </li>
-            {% endif %}
+
 
 
 
@@ -63,6 +51,8 @@
       </ul>
     </div>
   </div>
+
+
       <div class="navbar-collapse collapse w-400 order-3 dual-collapse2">
 
 
@@ -76,6 +66,10 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'post_favourite_list' %}">Favourites</a></li>
             <li><a class="dropdown-item" href="{% url 'create_post' %}">Create New Blog</a></li>
+            <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Change Profile</a></li>
+
+
+
           </ul>
         </li>
          {% endif %}

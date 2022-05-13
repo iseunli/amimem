@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block content %}
+{% block name %}
+    <h1>TEST 2</h1>
+{% endblock name %}
+
+{% block title %}
+    Test2
+{% endblock title %}
+
+{% block test %}
+<p><script type="text/javascript" language="JavaScript">
+    var res="14323"; 
+   function check_me()
+   {
+       var count=0;
+       with(document.test) {
+   if (!Q1[0].checked&&!Q1[1].checked&&!Q1[2].checked&&!Q1[3].checked)  
+   {count+=1};  
+   if (!Q2[0].checked&&!Q2[1].checked&&!Q2[2].checked&&!Q2[3].checked)  
+   {count+=1};  
+   if (!Q3[0].checked&&!Q3[1].checked&&!Q3[2].checked&&!Q3[3].checked)  
+   {count+=1};  
+   if (!Q4[0].checked&&!Q4[1].checked&&!Q4[2].checked&&!Q4[3].checked)  
+   {count+=1};  
+   if (!Q5[0].checked&&!Q5[1].checked&&!Q5[2].checked&&!Q5[3].checked)  
+   {count+=1};  
+   if (count>0) alert("You have not completed all the tasks. Test yourself!")    
+           else answer();
+       }
+   } 
+    
+   function control(k, f1,f2,f3,f4,f5) {
+   if (k==1&&f1.checked) return true;
+   if (k==2&&f2.checked) return true;
+   if (k==3&&f3.checked) return true;
+   if (k==4&&f4.checked) return true;
+   if (k==5&&f5.checked) return true;
+   return false;
+   }
+   
+   function answer() {
+   answ="";
+        with(document)    {
+       answ+=control(res.charAt(0) ,test.Q1[0],test.Q1[1],test.Q1[2],test.Q1[3])?"1":"0";
+   answ+=control(res.charAt(1) ,test.Q2[0],test.Q2[1],test.Q2[2],test.Q2[3])?"1":"0";
+   answ+=control(res.charAt(2) ,test.Q3[0],test.Q3[1],test.Q3[2],test.Q3[3])?"1":"0";
+   answ+=control(res.charAt(3) ,test.Q4[0],test.Q4[1],test.Q4[2],test.Q4[3])?"1":"0";
+   answ+=control(res.charAt(4) ,test.Q5[0],test.Q5[1],test.Q5[2],test.Q5[3])?"1":"0";
+   
+   showResult();
+       }
+   }
+    
+   function showResult()   {
+       var nok=0;
+       var i,s;
+    
+   for (i=0; i<answ.length;i++) {nok+=answ.charAt(i)=="1"?1:0;}
+   if(nok==5) s="GREAT";
+   if(nok<5) s="WELL";
+   if(nok<3.75) s="SATISFACTORILY";
+   if (nok<2.5) s="UNSATISFACTORY";
+       document.test.s1.
+       value="Number of correct answers "+nok+". Your mark "+s+". Look at the window next to the question number. If the answer is correct, there (+). If the answer is wrong, there (-).";        
+   with(document.test)
+       {
+       if (answ.charAt(0)=="1") {T1.value=" + "} else {T1.value=" - "};
+      if (answ.charAt(1)=="1") {T2.value=" + "} else {T2.value=" - "};
+      if (answ.charAt(2)=="1") {T3.value=" + "} else {T3.value=" - "};
+      if (answ.charAt(3)=="1") {T4.value=" + "} else {T4.value=" - "};
+      if (answ.charAt(4)=="1") {T5.value=" + "} else {T5.value=" - "};
+        }
+   }
+   function showhide(obj){
+       if(obj == 'none') return 'inline';
+       else return 'none';
+   }
+   </script>
+   <center><b>Inazuma 11</b></center><br/><br/>
+   &nbsp;&nbsp;&nbsp;<span style="color:#006699;text-decoration:underline;cursor:pointer;" onclick="document.getElementById('instruction').style.display = showhide(document.getElementById('instruction').style.display)">
+    Instruction</span>
+    <br/>
+   <div id="instruction" style="display: none; width: 100%;">
+   <ul>
+   <li>Choose one of the options in each of the 5 questions;</li>
+   <li>Click on the "Show result" button;</li>
+   <li>The script will not show the result until you answer all the questions;</li>
+   <li>Look in the window next to the job number. If the answer is correct, then there (+). If you made a mistake, there (-).</li>
+   <li>1 point is awarded for each correct answer;</li>
+   <li>Grades: less than 2.5 points - UNSATISFACTORY, from 2.5 but less than 3.75 - SATISFACTORY, 3.75 and less than 5 - GOOD, 5 - EXCELLENT;</li>
+   <li>To reset the test result, click the "Reset Answers" button;</li>
+   </ul>
+   </div>
+   <form name="test"><ol>
+   <li><INPUT type="text" size="1" value="" name="T1"/><b> Who became the coach of Raimon GO when Endou left?</b><br/>
+   <input type="radio" value="0" name="Q1"/> Fubuki Shirou<br />
+   <input type="radio" value="1" name="Q1"/> Goenji Shuuya<br />
+   <input type="radio" value="2" name="Q1"/> Kudou Michiya<br />
+   <input type="radio" value="3" name="Q1"/> Kidou Yuuto<br />
+   <br/></li><li><INPUT type="text" size="1" value="" name="T2"/><b> Who\'s the Captain of Ancient Dark?</b><br/>
+   <input type="radio" value="0" name="Q2"/> Hakuryuu<br />
+   <input type="radio" value="1" name="Q2"/> Sangoku Taichi<br />
+   <input type="radio" value="2" name="Q2"/> Kai<br />
+   <input type="radio" value="3" name="Q2"/> Shuu<br />
+   <br/></li><li><INPUT type="text" size="1" value="" name="T3"/><b> Who is Nanobana Kinako\'s seiyuu (voice actor)</b><br/>
+   <input type="radio" value="0" name="Q3"/> Yuuki asuna<br />
+   <input type="radio" value="1" name="Q3"/> Oohara Takashi<br />
+   <input type="radio" value="2" name="Q3"/> Yuuki aoi<br />
+   <input type="radio" value="3" name="Q3"/> Terasaki yuka<br />
+   <br/></li><li><INPUT type="text" size="1" value="" name="T4"/><b> Who is Endou\'s wife on Inazuma Eleven GO?(on the episodes)</b><br/>
+   <input type="radio" value="0" name="Q4"/> Otonashi haruna<br />
+   <input type="radio" value="1" name="Q4"/> Raimon Natsumi<br />
+   <input type="radio" value="2" name="Q4"/> Ono Fuuyuka<br />
+   <input type="radio" value="3" name="Q4"/> yagame Reina<br />
+   <br/></li><li><INPUT type="text" size="1" value="" name="T5"/><b> What are Tobitaka Seiya hissatsu defend technique ?</b><br/>
+   <input type="radio" value="0" name="Q5"/> Omega The Hand<br />
+   <input type="radio" value="1" name="Q5"/> The Wall<br />
+   <input type="radio" value="2" name="Q5"/> Shinkuuma<br />
+   <input type="radio" value="3" name="Q5"/> Flame Dance<br />
+   <br/></li></ol>      
+   <CENTER>
+   <P><TEXTAREA name="s1" rows="4" cols="70" readonly> </TEXTAREA> </P>
+   <INPUT onclick="check_me()" type="button" value="Check"/>&nbsp;&nbsp;&nbsp;&nbsp; 
+   <INPUT type="reset" value="Reset"/> 
+   </CENTER>        
+   </form> 
+   </p>
+{% endblock test %}
+
+{% endblock %}
