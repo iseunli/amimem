@@ -39,6 +39,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button class ="btn btn-secondary">Update</button>
+         <button class ="btn btn-secondary"><a href="{% url 'mainpage' %}" class="btn btn-secondary"> Go Back </a></button>
     </form>
 
 </div>
