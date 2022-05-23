@@ -2,18 +2,14 @@
 {% block content %}
 
 
-
-<h1>Categories</h1>
+<div class = "newsWrapper">
+<h1>Categories:</h1>
 
   {% for item in cat_menu_list %}
-    <h4> <a class="dropdown-item" href="{% url 'category' item %}"> {{ item }} </a>
-    </h4>
+    <h2> <a class="dropdown-item" href="{% url 'category' item %}"> {{ item }} </a>
+    </h2>
   {% endfor%}
-
-
+</div>
+</div>
 
 {% endblock %}
-
-
-
-

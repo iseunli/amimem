@@ -1,4 +1,3 @@
-
 {% block content %}
 <!DOCTYPE html>
  {% load static %}
@@ -8,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnimeminA</title>
-
 
     <script src="{% static 'js/main.js ' %}"></script>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
@@ -24,10 +22,12 @@
      color: purple;
      background-color: transparent;
      text-decoration: none;
- }</style>
+ }
+
+</style>
+
+
 <body>
-
-
 <header class="header">
     <div class="container-xl">
         <div class="row justify-content-between">
@@ -43,42 +43,39 @@
                     <a href="{% url 'test' %}">tests</a>
                 </nav>
             </div>
+
             <div class="col-xl-3" style="display: flex; justify-content: space-around">
+            {% if user.is_authenticated%}
 
                  <ul class="navbar-nav ml-auto">
-        {% if user.is_authenticated%}
                  <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <button class="loginFormShowBtn"> {{ user.username }} </button>
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <button > {{ user.username }} </button>
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'post_favourite_list' %}">Favourites</a></li>
             <li><a class="dropdown-item" href="{% url 'create_post' %}">Create New Blog</a></li>
+            <li><a class="dropdown-item" href="{% url 'addevent' %}">Create New Event</a></li>
             <li><a class="dropdown-item" href="{% url 'edit_profile' %}">Change Profile</a></li>
-
-
+            <li><a class="dropdown-item" href="{% url 'logout' %}">LogOut </a></li>
 
           </ul>
-        </li>
+
+
          {% endif %}
+
+
+
 
 
 {% if not user.is_authenticated%}
             <li class="nav-item">
-                 <a class="nav-link" href="{% url 'registration' %}"> <button class="loginFormShowBtn">Register </button></a>
-            </li>
-            <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}"> <button class="loginFormShowBtn">Login </button></a>
+              <a href="{% url 'login' %}"> <button class="loginFormShowBtn">Login </button></a>
+                 <a  href="{% url 'registration' %}"> <button class="loginFormShowBtn">Register </button></a>
+
             </li>
         {% endif %}
-        {% if user.is_authenticated %}
-          <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">  <button class="loginFormShowBtn">LogOut </button> </a>
-            </li>
-{% endif %}
-
         </ul>
-
 
             </div>
         </div>
@@ -94,40 +91,36 @@
             <div class="col-xl-4" style="position:relative;">
 
                 <div class="newsWrapper">
+                  <p> Welcome!
+                  <br><br>
+                      If you are interested:
+                      <br>Cosplay, a portmanteau of "costume play",
+                      is an activity and performance art in which participants called
+                      cosplayers wear costumes and fashion accessories to represent a specific character.
+                      <br><br>
+                      To know better, to feel the vibe: we suggest you to participate our events!
+                  </p>
 
-                     {% for cospblog in object_list %}
-<p>
-
-                     <a href="{% url 'postarticle' cospblog.pk %}"> {{ cospblog.post_title }}</a>
-                       <br>
-                   <small>
-                   *{{ cospblog.author.first_name }} {{ cospblog.author.last_name }}* -
-                   <a href="{% url 'category' cospblog.category  %}"> {{ cospblog.category }} </a>
-                     </small>
-                   <br>
-
-
-</p>
- {% endfor %}
+                   <a href="{% url 'event' %}"><button class="loginBtn"> EVENTS </button></a>
 
                  </div>
             </div>
-            <div class="col-xl-8" style="position:relative;">
-                <p class="wrapperPopularTitle">popular <br>  latest</p>
-                <div class="animeCardWrapper">
-                    <div class="animeCard">
-                        <a href=""> <img src="{% static 'img/jojo.png' %}" alt=""></a>
-                        <p class="animeTitle"> JoJo </p>
-                    </div>
-                    <div class="animeCard">
-                        <img src="{% static 'img/demonslayer.png' %}" alt="">
-                        <p class="animeTitle">Demon Slayer</p>
-                    </div>
-                    <div class="animeCard">
-                        <img src="{% static 'img/attackontitan.png' %}" alt="">
-                        <p class="animeTitle">Attack on Titan</p>
 
-                </div>
+            <div class="col-xl-8" style="position:relative;">
+                <p class="wrapperPopularTitle">popular cosplays</p>
+                <br><br><br><br><br>
+                <div class="animeCardWrapper">
+
+                         {% for cospblog in object_list %}
+                             {% if cospblog.post_image %}
+                                 <div class="animeCard">
+                            <a href="{% url 'postarticle' cospblog.pk %}"><img src="{{ cospblog.post_image.url }}">
+                             {% else %}
+                            <img src="{% static 'img/demonslayer.png' %}" alt="">
+                             {% endif %}
+                             <p class="animeTitle"> {{  cospblog.post_title }}</p>
+                             </div>
+ {% endfor %}
             </div>
         </div>
     </div>
@@ -136,11 +129,9 @@
 
 
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-<script src="js/scripts.min.js"></script>
 </body>
 
 </html>

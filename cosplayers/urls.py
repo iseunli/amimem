@@ -1,7 +1,5 @@
 from django.urls import path
-from .views import MainPage, PostArticle, \
-    AddPostView, UpdatePostView, DeletePostView, \
-    LikeView, FavouriteView, CategoryView, CategoryMenuView
+from .views import *
 from . import views
 
 urlpatterns = [
@@ -18,10 +16,15 @@ urlpatterns = [
     path('post/edit/<int:pk>', UpdatePostView.as_view(), name="edit_post"),
     path('post/delete/<int:pk>', DeletePostView.as_view(), name="delete_post"),
     path('like/<int:pk>', LikeView, name="likes_post"),
+    path('going/<int:pk>', GoingView, name="going_event"),
     path('favourite/<int:pk>', FavouriteView, name="favourite_post"),
     path('favourites/', views.post_favourite_list, name="post_favourite_list"),
     path('category/<str:cats>/', CategoryView, name = 'category'),
     path('category_menu/',CategoryMenuView, name = 'category_menu'),
-
+    path('events/', EventsPage.as_view(), name="event"),
+    path('event/<int:pk>', EventDetails.as_view(), name = "eventdetails"),
+    path('add_event/', AddEventView.as_view(), name = "addevent"),
+    path('edit_event/<int:pk>', UpdateEventView.as_view(), name = "editevent"),
+    path('delete_event/<int:pk>', DeleteEventView.as_view(), name = "deleteevent"),
 
 ]

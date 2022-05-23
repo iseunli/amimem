@@ -1,11 +1,12 @@
-
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import CospBlog, Category
+from .models import CospBlog, Category, Event
 from django.urls import reverse_lazy, reverse
 import random
-from .forms import CospBlogForm
+from .forms import *
 from django.http import HttpResponseRedirect
+from rest_framework import routers, serializers, viewsets
+from django.contrib.auth.models import User
 
 def FavouriteView(request, pk):
     cospblog = get_object_or_404(CospBlog, id = request.POST.get('fav_id'))
@@ -31,10 +32,11 @@ def LikeView(request, pk):
     return HttpResponseRedirect(reverse('postarticle', args = [str(pk)]))
 
 
+
 class MainPage(ListView):
     model = CospBlog
     template_name = 'mainpage.html'
-    ordering = [ '-post_date']
+    queryset = CospBlog.objects.order_by('-like')[:4]
 
     def get_context_data(self, *args, **kwargs):
         cat_menu = Category.objects.all()
@@ -42,6 +44,61 @@ class MainPage(ListView):
         context ["cat_menu"] =  cat_menu
         return context
 
+###########################################################################################
+
+class EventsPage(ListView):
+    model = Event
+    template_name = 'event.html'
+    queryset = Event.objects.order_by('-i_am_going')[:3]
+
+class EventDetails(DetailView):
+    model = Event
+    template_name = 'event_details.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super( EventDetails, self).get_context_data( **kwargs)
+        stuff = get_object_or_404(Event, id=self.kwargs['pk'])
+        total_goings= stuff.total_goings()
+
+        goings = False
+        if stuff.i_am_going.filter(id=self.request.user.id).exists():
+            goings = True
+
+        context["total_goings"] = total_goings
+        context["goings"] = goings
+        return context
+
+def GoingView(request, pk):
+    event = get_object_or_404(Event, id = request.POST.get('going_id'))
+    goings=False
+    if event.i_am_going.filter(id=request.user.id).exists():
+        event.i_am_going.remove(request.user)
+        goings = False
+    else:
+        event.i_am_going.add(request.user)
+        goings=True
+    return HttpResponseRedirect(reverse('eventdetails', args = [str(pk)]))
+
+
+
+
+class AddEventView(CreateView):
+    model = Event
+    form_class = EventForm
+    template_name = 'event_add.html'
+
+
+class UpdateEventView(UpdateView):
+    model = Event
+    template_name = 'edit_event.html'
+    fields = ['name', 'event_date', 'place', 'description', 'event_image']
+
+class DeleteEventView(DeleteView):
+    model = Event
+    template_name = 'delete_event.html'
+    success_url = reverse_lazy('mainpage')
+
+############################################################################################
 class PostArticle(DetailView):
     model = CospBlog
     template_name = 'post_article.html'
@@ -87,7 +144,7 @@ class AddPostView(CreateView):
 class UpdatePostView(UpdateView):
     model = CospBlog
     template_name = 'edit_blog.html'
-    fields = ['post_title', 'your_post']
+    fields = ['post_title', 'your_post', 'post_image']
 
 class DeletePostView(DeleteView):
     model = CospBlog
@@ -158,8 +215,8 @@ def checkans(request):
         msg = 0
         jumbbledgame(request)
 
-    if msg == 10:
-        failure = "You beat 10! \n Game Restarted"
+    if msg == 5:
+        failure = "You beat 5! \n Game Restarted"
         msg=0
     else:
         failure =""
@@ -170,7 +227,6 @@ def checkans(request):
 
 def quizz (request):
     return render(request, 'quiz.html')
-
 
 
 
