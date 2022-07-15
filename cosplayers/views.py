@@ -81,7 +81,6 @@ def GoingView(request, pk):
 
 
 
-
 class AddEventView(CreateView):
     model = Event
     form_class = EventForm
@@ -134,7 +133,6 @@ class PostArticle(DetailView):
         return context
 
 
-
 class AddPostView(CreateView):
     model = CospBlog
     form_class = CospBlogForm
@@ -150,8 +148,6 @@ class DeletePostView(DeleteView):
     model = CospBlog
     template_name = 'delete_blog.html'
     success_url = reverse_lazy('mainpage')
-
-
 
 def CategoryView(request, cats):
     category_posts = CospBlog.objects.filter(category = cats)
